@@ -30,8 +30,8 @@ Se valorará especialmente:
 Tu tarea es **implementar las vistas del dashboard** que actualmente están vacías. El proyecto incluye:
 
 * **Base de datos SQLite** lista para usar (`/db/database.sqlite`)
-* **4 vistas** a completar: Resumen, Clientes, Préstamos, Cuotas
-* **Infraestructura React** ya configurada (routing, estilos, hooks)
+* **2 vistas** a completar: Resumen y Datos
+* **Infraestructura React** ya configurada (navegación, estilos, hooks)
 * **Función helper** en `queries.js` para facilitar las queries
 
 ---
@@ -46,9 +46,9 @@ Tu tarea es **implementar las vistas del dashboard** que actualmente están vac�
 
 2. **Implementar las vistas** (`src/views/`)
 
-   * Cargar datos usando `useEffect`
-   * Mostrar información mediante tablas, KPIs y/o gráficos
-   * Elegir las visualizaciones que consideres más útiles
+   * Completar la pestaña **Resumen** con KPIs y/o gráficos
+   * Completar la pestaña **Datos** con formularios o flujos de entrada de datos
+   * Elegir una solución clara y mantenible, priorizando criterio sobre cantidad
 
 3. **No modificar**
 
@@ -177,7 +177,7 @@ Explicando brevemente:
 
 ## ⏱️ Tiempo estimado
 
-2–3 horas. Prioriza claridad y criterio sobre perfección.
+1–2 horas. Prioriza claridad y criterio sobre perfección.
 
 
 ¡Buena suerte! 🚀

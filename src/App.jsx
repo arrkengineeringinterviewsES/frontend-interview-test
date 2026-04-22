@@ -2,16 +2,12 @@ import React, { useState } from 'react'
 import { S } from './styles/globals'
 import { useDatabase } from './hooks/useDatabase'
 import VistaResumen from './views/VistaResumen'
-import VistaClientes from './views/VistaClientes'
-import VistaPrestamos from './views/VistaPrestamos'
-import VistaCuotas from './views/VistaCuotas'
+import VistaDatos from './views/VistaDatos'
 
 // ─── Navigation Configuration ────────────────────────────────────────────────
 const VISTAS = [
-  { id: 'resumen',   label: 'Resumen' },
-  { id: 'clientes',  label: 'Clientes' },
-  { id: 'prestamos', label: 'Préstamos' },
-  { id: 'cuotas',    label: 'Cuotas' },
+  { id: 'resumen', label: 'Resumen' },
+  { id: 'datos', label: 'Datos' },
 ]
 
 // ─── Main App Component ──────────────────────────────────────────────────────
@@ -33,10 +29,8 @@ export default function App() {
         <div style={{ fontSize: 12, color: '#94a3b8' }}>{error}</div>
       </div>
     )
-    if (vista === 'resumen')   return <VistaResumen   db={db} />
-    if (vista === 'clientes')  return <VistaClientes  db={db} />
-    if (vista === 'prestamos') return <VistaPrestamos db={db} />
-    if (vista === 'cuotas')    return <VistaCuotas    db={db} />
+    if (vista === 'resumen') return <VistaResumen db={db} />
+    if (vista === 'datos') return <VistaDatos db={db} />
   }
 
   return (

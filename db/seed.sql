@@ -4,7 +4,7 @@
 -- ============================================================
 
 CREATE TABLE IF NOT EXISTS clientes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cliente_id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     apellidos TEXT NOT NULL,
     dni TEXT UNIQUE NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS clientes (
 );
 
 CREATE TABLE IF NOT EXISTS prestamos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    prestamo_id INTEGER PRIMARY KEY AUTOINCREMENT,
     cliente_id INTEGER NOT NULL,
     tipo TEXT CHECK(tipo IN ('Hipoteca', 'Personal', 'Coche', 'Negocios')) NOT NULL,
     importe_solicitado REAL NOT NULL,
@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS prestamos (
     fecha_solicitud DATE NOT NULL,
     fecha_aprobacion DATE,
     estado TEXT CHECK(estado IN ('Pendiente', 'Aprobado', 'Denegado', 'Cancelado')) DEFAULT 'Pendiente',
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
 );
 
 CREATE TABLE IF NOT EXISTS cuotas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cuota_id INTEGER PRIMARY KEY AUTOINCREMENT,
     prestamo_id INTEGER NOT NULL,
     numero_cuota INTEGER NOT NULL,
     fecha_vencimiento DATE NOT NULL,
@@ -38,16 +38,14 @@ CREATE TABLE IF NOT EXISTS cuotas (
     intereses REAL NOT NULL,
     estado TEXT CHECK(estado IN ('Pendiente', 'Pagada', 'Atrasada')) DEFAULT 'Pendiente',
     fecha_pago DATE,
-    FOREIGN KEY (prestamo_id) REFERENCES prestamos(id)
+    FOREIGN KEY (prestamo_id) REFERENCES prestamos(prestamo_id)
 );
 
 CREATE TABLE IF NOT EXISTS scoring (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cliente_id INTEGER NOT NULL UNIQUE,
+    cliente_id INTEGER PRIMARY KEY,
     puntuacion INTEGER CHECK(puntuacion BETWEEN 0 AND 1000),
     nivel TEXT CHECK(nivel IN ('Muy Alto', 'Alto', 'Medio', 'Bajo', 'Muy Bajo')),
-    ultima_actualizacion DATE,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
 );
 
 -- ===== CLIENTES =====
@@ -127,19 +125,18 @@ INSERT INTO cuotas VALUES (25,11,3,'2023-06-10',217.00,177.11,39.89,'Pagada','20
 INSERT INTO cuotas VALUES (26,11,4,'2023-07-10',217.00,178.18,38.82,'Atrasada',NULL);
 
 -- ===== SCORING =====
-INSERT INTO scoring VALUES (1,1,820,'Alto','2023-10-01');
-INSERT INTO scoring VALUES (2,2,610,'Medio','2023-09-15');
-INSERT INTO scoring VALUES (3,3,780,'Alto','2023-10-01');
-INSERT INTO scoring VALUES (4,4,540,'Medio','2023-11-01');
-INSERT INTO scoring VALUES (5,5,310,'Bajo','2023-05-20');
-INSERT INTO scoring VALUES (6,6,870,'Muy Alto','2023-10-15');
-INSERT INTO scoring VALUES (7,7,760,'Alto','2023-09-01');
-INSERT INTO scoring VALUES (8,8,480,'Bajo','2023-08-01');
-INSERT INTO scoring VALUES (9,9,690,'Medio','2023-09-10');
-INSERT INTO scoring VALUES (10,10,730,'Alto','2023-11-15');
-INSERT INTO scoring VALUES (11,11,590,'Medio','2023-08-20');
-INSERT INTO scoring VALUES (12,12,420,'Bajo','2023-10-10');
-INSERT INTO scoring VALUES (13,13,810,'Alto','2023-07-01');
-INSERT INTO scoring VALUES (14,14,650,'Medio','2023-11-01');
-INSERT INTO scoring VALUES (15,15,380,'Bajo','2023-04-25');
-
+INSERT INTO scoring VALUES (1,820,'Alto');
+INSERT INTO scoring VALUES (2,610,'Medio');
+INSERT INTO scoring VALUES (3,780,'Alto');
+INSERT INTO scoring VALUES (4,540,'Medio');
+INSERT INTO scoring VALUES (5,310,'Bajo');
+INSERT INTO scoring VALUES (6,870,'Muy Alto');
+INSERT INTO scoring VALUES (7,760,'Alto');
+INSERT INTO scoring VALUES (8,480,'Bajo');
+INSERT INTO scoring VALUES (9,690,'Medio');
+INSERT INTO scoring VALUES (10,730,'Alto');
+INSERT INTO scoring VALUES (11,590,'Medio');
+INSERT INTO scoring VALUES (12,420,'Bajo');
+INSERT INTO scoring VALUES (13,810,'Alto');
+INSERT INTO scoring VALUES (14,650,'Medio');
+INSERT INTO scoring VALUES (15,380,'Bajo');
